@@ -17,7 +17,7 @@
  * the value get from the above equation, take nth root of that value and we get value of z
  * To calculate near miss "left hand side - z power n", also calculated "(z+1) power n - left hand side"
  * whichever difference will be less that will be our near miss
- * Then calculate the relative miss
+ * Then calculate the relative miss 
  * then compare relative miss with smallest miss to retrieve the smallest possible miss
  *  
  * No help taken from any outside source.
@@ -51,6 +51,8 @@ public class FermatNearMiss {
 		long x = lowerlimit;
 	    long y = 0;
 	    long z = 0;
+	    long x_value = 0;
+	    long y_value = 0;
 	    
 	    // Scanner object to take the user input
 	    Scanner userinput = new Scanner(System.in);
@@ -72,19 +74,14 @@ public class FermatNearMiss {
 	    {
 	    	for (y = lowerlimit; y<=k; y++)
 	    	{	
-	    		System.out.println("*********************************");
-	        	System.out.println("x = " + x);
-	        	System.out.println("y = " + y);
-	        	System.out.println("n = " + n);
-	        	System.out.println();
+	    		
 	        	//lefthandside = x power n + y power n
 	        	long lefthandside = (long)((Math.pow (x, n))+(Math.pow (y, n)));
-	        	System.out.println("x^"+n+" + y^"+n+" = "+lefthandside);
+	        	//System.out.println("x^"+n+" + y^"+n+" = "+lefthandside);
 	        
 	        	//taking nth root of left hand side to get the z value
 	        	z = (int) Math.pow (lefthandside, 1.0/n);
-	        	System.out.println("z = "+z);
-	        	System.out.println();
+	        	//System.out.println("z = "+z);
 	        
 	        	//Calculating near miss for z and z+1
 	        	long nearmiss = (long)(lefthandside - Math.pow (z, n));
@@ -92,23 +89,31 @@ public class FermatNearMiss {
 	        	{
 	        		nearmiss = (long)(Math.pow (z+1, n) - lefthandside);
 	        	}
-	        	System.out.println("Near Miss= "+nearmiss);
+	        	//System.out.println("Near Miss= "+nearmiss);
 	        
 	        	//calculating the relative miss
-	        	double relativemiss = 100. * nearmiss / lefthandside;
-	        	System.out.println("Relative Miss= "+relativemiss);
+	        	double relativemiss = 1. * nearmiss / lefthandside;
+	        	//System.out.println("Relative Miss= "+relativemiss);
 	        
 	        
 	        	//finding smallest miss
 	        	if(relativemiss<smallest_miss)
 	        	{
 	        		smallest_miss = relativemiss;
+
+	        		x_value = x;
+	        		y_value = y;
 	        	}
-	        	System.out.println("Smallest Miss= "+smallest_miss);
+	        	//System.out.println("Smallest Miss= "+smallest_miss);
 	           
 	        }
 	    	x++;
 	    }
+	    System.out.println("\n\n*******************************************");
+	    System.out.println("*******************************************\n");
+	    System.out.println("x = "+x_value+", y = "+y_value+",  Relative Diff= "+String.format("%.7f", smallest_miss));
+	    System.out.println("\n*******************************************");
+	    System.out.println("*******************************************");
 	}
 }
 
